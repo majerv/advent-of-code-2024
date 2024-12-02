@@ -13,11 +13,9 @@ public record Report(List<Integer> levels) {
     return new Report(levels);
   }
 
-  public boolean isSafe(List<Integer> levels) {
+  private static boolean isSafe(List<Integer> levels, boolean allowSingleError) {
     int sig = 0;
     int diff;
-
-    System.out.printf("  Checking %s\n", levels);
 
     for (int i = 1; i < levels.size(); i++) {
       int prev = levels.get(i - 1);
@@ -25,12 +23,12 @@ public record Report(List<Integer> levels) {
 
       diff = Math.abs(next - prev);
       if (diff < 1 || diff > 3) {
-        return false;
+        return allowSingleError && isSafeAny(levels, i);
       }
 
       int newSig = (int) Math.signum(next - prev);
       if (sig != 0 && newSig != sig) {
-        return false;
+        return allowSingleError && isSafeAny(levels, i);
       } else {
         sig = newSig;
       }
@@ -39,56 +37,28 @@ public record Report(List<Integer> levels) {
     return true;
   }
 
-  public boolean isSafe() {
-    return isSafe(levels);
-  }
+  private static boolean isSafeAny(List<Integer> levels, int problemAt) {
+    int from = Math.max(0, problemAt - 2);
+    int to = Math.min(problemAt, levels.size() - 1);
 
-  public boolean isSafeWithDampener() {
-    int sig = 0;
-    int diff;
-    int errors = 0;
-
-    for (int i = 1; i < levels.size(); i++) {
-      int prev = levels.get(i - 1);
-      int next = levels.get(i);
-
-      diff = Math.abs(next - prev);
-      if (diff < 1 || diff > 3) {
-        if (errors == 0) {
-          System.out.printf("Problem with %s at i=%s, prev=%s, next=%s\n", levels, i, prev, next);
-          return isSafeAny(levels);
-        } else {
-          return false;
-        }
-      }
-
-      int newSig = (int) Math.signum(next - prev);
-      if (sig != 0 && newSig != sig) {
-        if (errors == 0) {
-          System.out.printf("Problem with %s at i=%s, prev=%s, next=%s\n", levels, i, prev, next);
-          return isSafeAny(levels);
-        } else {
-          return false;
-        }
-      } else {
-        sig = newSig;
-      }
+    for (int i = from; i <= to; i++) {
+      if (isSafe(elementsExcept(levels, i), false)) return true;
     }
-    return true;
-  }
 
-  private boolean isSafeAny(List<Integer> list) {
-    for (int i = 0; i < levels.size(); i++) {
-      if (isSafe(newList(list, i))) return true;
-    }
     return false;
   }
 
-  public List<Integer> newList(List<Integer> list, int exceptIndex) {
-    if (exceptIndex == -1) return list;
-
+  private static List<Integer> elementsExcept(List<Integer> list, int exceptIndex) {
     var copy = new ArrayList<>(list);
     copy.remove(exceptIndex);
     return copy;
+  }
+
+  public boolean isSafe() {
+    return isSafe(levels, false);
+  }
+
+  public boolean isSafeWithSingleError() {
+    return isSafe(levels, true);
   }
 }
