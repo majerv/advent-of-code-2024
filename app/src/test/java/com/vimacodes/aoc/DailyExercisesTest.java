@@ -30,25 +30,25 @@ public class DailyExercisesTest {
         Arguments.of("day2_sample", solve(Day2Exercises::secondStar), 4), //
         Arguments.of("day2_inputs", solve(Day2Exercises::secondStar), 308), //
         // day3
-        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 0), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 0), //
-        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 0), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 0) //
+        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 161), //
+        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 166905464), //
+        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 48), //
+        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684) //
         );
   }
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 0), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 0), //
-        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 0), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 0) //
+        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 161), //
+        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 166905464), //
+        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 48), //
+        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684) //
         );
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
-  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
-  //  @MethodSource
+  //  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
+  @MethodSource
   void testInputs(
       final String inputName, final Function<String, Long> solver, final long expectedResult) {
     long result = solver.apply(Inputs.resourceToString(inputName));
