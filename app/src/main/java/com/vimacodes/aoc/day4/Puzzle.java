@@ -123,6 +123,6 @@ public record Puzzle(char[][] letters, int rows, int cols) {
   }
 
   private char getCharOrStarAt(int i, int j) {
-    return 0 <= i && i < rows && 0 <= j && j < cols ? letters[i][j] : '*';
+    return validRow(i) && validCol(j) ? letters[i][j] : '*';
   }
 }
