@@ -34,7 +34,12 @@ public class DailyExercisesTest {
         Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 161), //
         Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 166905464), //
         Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 48), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684) //
+        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684), //
+        // day4
+        Arguments.of("day4_sample", solve(Day4Exercises::firstStar), 18), //
+        Arguments.of("day4_inputs", solve(Day4Exercises::firstStar), 2336), //
+        Arguments.of("day4_sample", solve(Day4Exercises::secondStar), 9), //
+        Arguments.of("day4_inputs", solve(Day4Exercises::secondStar), 1831) //
         );
   }
 
