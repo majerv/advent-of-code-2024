@@ -3,6 +3,7 @@ package com.vimacodes.aoc;
 import com.vimacodes.aoc.day1.Day1Exercises;
 import com.vimacodes.aoc.day2.Day2Exercises;
 import com.vimacodes.aoc.day3.Day3Exercises;
+import com.vimacodes.aoc.day4.Day4Exercises;
 import com.vimacodes.aoc.utils.Inputs;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -39,16 +40,16 @@ public class DailyExercisesTest {
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 161), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 166905464), //
-        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 48), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684) //
+        Arguments.of("day4_sample", solve(Day4Exercises::firstStar), 18), //
+        Arguments.of("day4_inputs", solve(Day4Exercises::firstStar), 2336), //
+        Arguments.of("day4_sample", solve(Day4Exercises::secondStar), 9), //
+        Arguments.of("day4_inputs", solve(Day4Exercises::secondStar), 1831) //
         );
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
-  //  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
-  @MethodSource
+  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
+  //  @MethodSource
   void testInputs(
       final String inputName, final Function<String, Long> solver, final long expectedResult) {
     long result = solver.apply(Inputs.resourceToString(inputName));
