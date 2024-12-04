@@ -48,138 +48,42 @@ public record Puzzle(char[][] letters, int rows, int cols) {
   }
 
   private long countHorizontal(String word, int i, int j) {
-    return countHorizontalF(word, i, j) + countHorizontalB(word, i, j);
+    return countInDirection(word, i, j, 0, 1) + countInDirection(word, i, j, 0, -1);
   }
 
   private long countVertical(String word, int i, int j) {
-    return countVerticalF(word, i, j) + countVerticalB(word, i, j);
+    return countInDirection(word, i, j, 1, 0) + countInDirection(word, i, j, -1, 0);
   }
 
   private long countDiagonal(String word, int i, int j) {
-    return countDiagonalFR(word, i, j)
-        + countDiagonalBL(word, i, j)
-        + countDiagonalFL(word, i, j)
-        + countDiagonalBR(word, i, j);
+    return countInDirection(word, i, j, 1, 1)
+        + countInDirection(word, i, j, -1, -1)
+        + countInDirection(word, i, j, 1, -1)
+        + countInDirection(word, i, j, -1, 1);
   }
 
-  private long countVerticalF(String word, int i, int j) {
+  private long countInDirection(String word, int i, int j, int verticalMove, int horizontalMove) {
     int k = 0;
+    int posI = i;
+    int posJ = j;
 
-    for (; k < word.length() && i + k < rows; k++) {
-      if (word.charAt(k) != letters[i + k][j]) return 0;
+    while (k < word.length() && validRow(posI) && validCol(posJ)) {
+      if (word.charAt(k) != letters[posI][posJ]) return 0;
+
+      k++;
+      posI += verticalMove;
+      posJ += horizontalMove;
     }
 
-    if (k == word.length()) {
-      System.out.printf("VF: Found %s vertical at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
+    return k == word.length() ? 1 : 0;
   }
 
-  private long countVerticalB(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && i - k >= 0; k++) {
-      if (word.charAt(k) != letters[i - k][j]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("VB: Found backwards %s vertical at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
+  private boolean validCol(int pos) {
+    return 0 <= pos && pos < cols;
   }
 
-  private long countHorizontalF(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && j + k < cols; k++) {
-      if (word.charAt(k) != letters[i][j + k]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("HF: Found %s at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  private long countHorizontalB(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && j - k >= 0; k++) {
-      if (word.charAt(k) != letters[i][j - k]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("HB: Found backwards %s at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  private long countDiagonalFR(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && j + k < cols & i + k < rows; k++) {
-      if (word.charAt(k) != letters[i + k][j + k]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("DFR: Found %s diagonal at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  private long countDiagonalBL(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && j - k >= 0 && i - k >= 0; k++) {
-      if (word.charAt(k) != letters[i - k][j - k]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("DBL: Found backwards %s diagonal left at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  private long countDiagonalFL(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && j - k >= 0 & i + k < rows; k++) {
-      if (word.charAt(k) != letters[i + k][j - k]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("DFL: Found %s diagonal left at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  private long countDiagonalBR(String word, int i, int j) {
-    int k = 0;
-
-    for (; k < word.length() && j + k < cols && i - k >= 0; k++) {
-      if (word.charAt(k) != letters[i - k][j + k]) return 0;
-    }
-
-    if (k == word.length()) {
-      System.out.printf("DBR: Found backwards %s diagonal right at (%s,%s)\n", word, i, j);
-      return 1;
-    } else {
-      return 0;
-    }
+  private boolean validRow(int pos) {
+    return 0 <= pos && pos < rows;
   }
 
   public long countCrossXmas() {
