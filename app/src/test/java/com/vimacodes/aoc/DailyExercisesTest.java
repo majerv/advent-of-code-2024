@@ -4,6 +4,7 @@ import com.vimacodes.aoc.day1.Day1Exercises;
 import com.vimacodes.aoc.day2.Day2Exercises;
 import com.vimacodes.aoc.day3.Day3Exercises;
 import com.vimacodes.aoc.day4.Day4Exercises;
+import com.vimacodes.aoc.day5.Day5Exercises;
 import com.vimacodes.aoc.utils.Inputs;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -45,10 +46,10 @@ public class DailyExercisesTest {
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day4_sample", solve(Day4Exercises::firstStar), 18), //
-        Arguments.of("day4_inputs", solve(Day4Exercises::firstStar), 2336), //
-        Arguments.of("day4_sample", solve(Day4Exercises::secondStar), 9), //
-        Arguments.of("day4_inputs", solve(Day4Exercises::secondStar), 1831) //
+        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 0), //
+        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 0), //
+        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 0), //
+        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 0) //
         );
   }
 
