@@ -22,35 +22,38 @@ public class DailyExercisesTest {
   private static Stream<Arguments> testInputs() {
     return Stream.of(
         // day1
-        Arguments.of("day1_sample", solve(Day1Exercises::firstStar), 11), //
-        Arguments.of("day1_inputs", solve(Day1Exercises::firstStar), 2264607), //
-        Arguments.of("day1_sample", solve(Day1Exercises::secondStar), 31), //
-        Arguments.of("day1_inputs", solve(Day1Exercises::secondStar), 19457120), //
+        Arguments.of("day1_sample", solve(Day1Exercises::firstStar), 11),
+        Arguments.of("day1_inputs", solve(Day1Exercises::firstStar), 2264607),
+        Arguments.of("day1_sample", solve(Day1Exercises::secondStar), 31),
+        Arguments.of("day1_inputs", solve(Day1Exercises::secondStar), 19457120),
         // day2
-        Arguments.of("day2_sample", solve(Day2Exercises::firstStar), 2), //
-        Arguments.of("day2_inputs", solve(Day2Exercises::firstStar), 236), //
-        Arguments.of("day2_sample", solve(Day2Exercises::secondStar), 4), //
-        Arguments.of("day2_inputs", solve(Day2Exercises::secondStar), 308), //
+        Arguments.of("day2_sample", solve(Day2Exercises::firstStar), 2),
+        Arguments.of("day2_inputs", solve(Day2Exercises::firstStar), 236),
+        Arguments.of("day2_sample", solve(Day2Exercises::secondStar), 4),
+        Arguments.of("day2_inputs", solve(Day2Exercises::secondStar), 308),
         // day3
-        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 161), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 166905464), //
-        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 48), //
-        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684), //
+        Arguments.of("day3_sample", solve(Day3Exercises::firstStar), 161),
+        Arguments.of("day3_inputs", solve(Day3Exercises::firstStar), 166905464),
+        Arguments.of("day3_sample", solve(Day3Exercises::secondStar), 48),
+        Arguments.of("day3_inputs", solve(Day3Exercises::secondStar), 72948684),
         // day4
-        Arguments.of("day4_sample", solve(Day4Exercises::firstStar), 18), //
-        Arguments.of("day4_inputs", solve(Day4Exercises::firstStar), 2336), //
-        Arguments.of("day4_sample", solve(Day4Exercises::secondStar), 9), //
-        Arguments.of("day4_inputs", solve(Day4Exercises::secondStar), 1831) //
-        );
+        Arguments.of("day4_sample", solve(Day4Exercises::firstStar), 18),
+        Arguments.of("day4_inputs", solve(Day4Exercises::firstStar), 2336),
+        Arguments.of("day4_sample", solve(Day4Exercises::secondStar), 9),
+        Arguments.of("day4_inputs", solve(Day4Exercises::secondStar), 1831),
+        // day5
+        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 143),
+        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 5248),
+        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 123),
+        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507));
   }
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 143), //
-        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 5248), //
-        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 123), //
-        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507) //
-        );
+        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 143),
+        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 5248),
+        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 123),
+        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
