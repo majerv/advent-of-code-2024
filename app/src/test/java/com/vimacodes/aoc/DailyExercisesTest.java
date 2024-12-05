@@ -46,10 +46,10 @@ public class DailyExercisesTest {
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 0), //
-        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 0), //
-        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 0), //
-        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 0) //
+        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 143), //
+        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 5248), //
+        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 123), //
+        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507) //
         );
   }
 
