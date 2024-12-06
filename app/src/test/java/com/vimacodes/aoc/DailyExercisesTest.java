@@ -5,6 +5,7 @@ import com.vimacodes.aoc.day2.Day2Exercises;
 import com.vimacodes.aoc.day3.Day3Exercises;
 import com.vimacodes.aoc.day4.Day4Exercises;
 import com.vimacodes.aoc.day5.Day5Exercises;
+import com.vimacodes.aoc.day6.Day6Exercises;
 import com.vimacodes.aoc.utils.Inputs;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -50,10 +51,10 @@ public class DailyExercisesTest {
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 143),
-        Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 5248),
-        Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 123),
-        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507));
+        Arguments.of("day6_sample", solve(Day6Exercises::firstStar), 41),
+        Arguments.of("day6_inputs", solve(Day6Exercises::firstStar), 4515),
+        Arguments.of("day6_sample", solve(Day6Exercises::secondStar), 6),
+        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 0));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
