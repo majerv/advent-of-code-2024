@@ -46,7 +46,12 @@ public class DailyExercisesTest {
         Arguments.of("day5_sample", solve(Day5Exercises::firstStar), 143),
         Arguments.of("day5_inputs", solve(Day5Exercises::firstStar), 5248),
         Arguments.of("day5_sample", solve(Day5Exercises::secondStar), 123),
-        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507));
+        Arguments.of("day5_inputs", solve(Day5Exercises::secondStar), 4507),
+        // day6
+        Arguments.of("day6_sample", solve(Day6Exercises::firstStar), 41),
+        Arguments.of("day6_inputs", solve(Day6Exercises::firstStar), 4515),
+        Arguments.of("day6_sample", solve(Day6Exercises::secondStar), 6),
+        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 1309));
   }
 
   private static Stream<Arguments> currentDay() {
@@ -54,7 +59,7 @@ public class DailyExercisesTest {
         Arguments.of("day6_sample", solve(Day6Exercises::firstStar), 41),
         Arguments.of("day6_inputs", solve(Day6Exercises::firstStar), 4515),
         Arguments.of("day6_sample", solve(Day6Exercises::secondStar), 6),
-        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 0));
+        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 1309));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
