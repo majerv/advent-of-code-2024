@@ -62,15 +62,15 @@ public class DailyExercisesTest {
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day7_sample", solve(Day7Exercises::firstStar), 3749),
-        Arguments.of("day7_inputs", solve(Day7Exercises::firstStar), 1289579105366L),
-        Arguments.of("day7_sample", solve(Day7Exercises::secondStar), 11387),
-        Arguments.of("day7_inputs", solve(Day7Exercises::secondStar), 92148721834692L));
+        Arguments.of("day6_sample", solve(Day6Exercises::firstStar), 41),
+        Arguments.of("day6_inputs", solve(Day6Exercises::firstStar), 4515),
+        Arguments.of("day6_sample", solve(Day6Exercises::secondStar), 6),
+        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 1309));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
-  //  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
-  @MethodSource
+  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
+  //  @MethodSource
   void testInputs(
       final String inputName, final Function<String, Long> solver, final long expectedResult) {
     long result = solver.apply(Inputs.resourceToString(inputName));

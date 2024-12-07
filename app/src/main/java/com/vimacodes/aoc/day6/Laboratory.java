@@ -3,15 +3,10 @@ package com.vimacodes.aoc.day6;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lombok.Value;
+import javax.annotation.Nullable;
+import lombok.AllArgsConstructor;
 
-@Value
-public class Laboratory {
-
-  int rows;
-  int cols;
-  char[][] map;
-  Pos start;
+public record Laboratory(int rows, int cols, char[][] map, Pos start) {
 
   public static Laboratory parse(String text) {
     List<String> lines = text.lines().toList();
@@ -29,7 +24,7 @@ public class Laboratory {
       line = lines.get(i);
       for (int j = 0; j < cols; j++) {
         char c = line.charAt(j);
-        System.out.print(c);
+        //        System.out.print(c);
         if (c == '^') {
           map[i][j] = '.';
           start = new Pos(i, j);
@@ -37,7 +32,7 @@ public class Laboratory {
           map[i][j] = c;
         }
       }
-      System.out.println();
+      //      System.out.println();
     }
 
     System.out.println("Start pos: " + start);
@@ -45,29 +40,20 @@ public class Laboratory {
   }
 
   public long walk() {
-    var pos = start;
-    var dir = Direction.UP;
-
     Set<Integer> visitedFields = new HashSet<>();
-    Pos next = pos.move(dir);
+    Walker walker = new Walker(start, Direction.UP, null);
 
-    while (validPos(next)) {
-      visitedFields.add(fieldNumber(pos));
-      if (free(next)) {
-        pos = next;
-      } else {
-        dir = dir.turnRight();
-      }
-
-      next = pos.move(dir);
+    while (walker.isInLab()) {
+      visitedFields.add(fieldNumber(walker.pos));
+      walker.move();
     }
 
-    visitedFields.add(fieldNumber(pos));
+    //    visitedFields.add(fieldNumber(walker.currentPos));
     return visitedFields.size();
   }
 
   private boolean free(Pos pos) {
-    return map[pos.i()][pos.j()] != '#';
+    return !validPos(pos) || map[pos.i()][pos.j()] != '#';
   }
 
   private boolean validPos(Pos pos) {
@@ -91,7 +77,7 @@ public class Laboratory {
 
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
-        if (map[i][j] == '.' && isLoopWithBlockAt(new Pos(i, j))) {
+        if (map[i][j] == '.' && isLoopWithBlockAt3(new Pos(i, j))) {
           loops++;
         }
       }
@@ -126,5 +112,72 @@ public class Laboratory {
     }
 
     return false;
+  }
+
+  private boolean isLoopWithBlockAt3(Pos blockAt) {
+    int dups = 0;
+    int all = rows * cols;
+
+    Set<Integer> visitedFields = new HashSet<>();
+    Walker walker = new Walker(start, Direction.UP, blockAt);
+
+    while (walker.isInLab()) {
+      if (!visitedFields.add(fieldNumber(walker.pos))) {
+        dups++;
+      }
+      walker.move();
+
+      if (dups > all || visitedFields.size() >= all) return true;
+    }
+
+    return false;
+  }
+
+  private boolean isLoopWithBlockAt2(Pos blockAt) {
+    Walker walker = new Walker(start, Direction.UP, blockAt);
+
+    int all = rows * cols;
+    int dups = 0;
+
+    Set<Integer> visitedFields = new HashSet<>();
+
+    while (walker.isInLab()) {
+      if (!visitedFields.add(fieldNumber(walker.pos))) {
+        dups++;
+      }
+      walker.move();
+
+      if (dups >= all || visitedFields.size() >= all) return true;
+    }
+
+    return false;
+  }
+
+  @AllArgsConstructor
+  private class Walker {
+
+    private Pos pos;
+    private Direction dir;
+
+    @Nullable private Pos blockAt;
+
+    public boolean isInLab() {
+      return validPos(pos);
+    }
+
+    public boolean nextIsInLab() {
+      var next = pos.move(dir);
+      return validPos(next);
+    }
+
+    public void move() {
+      Pos next = pos.move(dir);
+
+      if (free(next) && !next.equals(blockAt)) {
+        pos = next;
+      } else {
+        dir = dir.turnRight();
+      }
+    }
   }
 }
