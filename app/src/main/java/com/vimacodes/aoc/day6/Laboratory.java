@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 public record Laboratory(int rows, int cols, char[][] map, Pos start) {
 
@@ -15,7 +16,7 @@ public record Laboratory(int rows, int cols, char[][] map, Pos start) {
 
     char[][] map = new char[rows][cols];
 
-    System.out.printf("rows: %s, cols: %s\n", rows, cols);
+    //    System.out.printf("rows: %s, cols: %s\n", rows, cols);
 
     Pos start = new Pos(0, 0);
 
@@ -35,21 +36,48 @@ public record Laboratory(int rows, int cols, char[][] map, Pos start) {
       //      System.out.println();
     }
 
-    System.out.println("Start pos: " + start);
+    //    System.out.println("Start pos: " + start);
     return new Laboratory(rows, cols, map, start);
   }
 
   public long walk() {
-    Set<Integer> visitedFields = new HashSet<>();
+    Set<Pos> visitedFields = new HashSet<>();
     Walker walker = new Walker(start, Direction.UP, null);
 
     while (walker.isInLab()) {
-      visitedFields.add(fieldNumber(walker.pos));
+      visitedFields.add(walker.pos);
       walker.move();
     }
 
-    //    visitedFields.add(fieldNumber(walker.currentPos));
     return visitedFields.size();
+  }
+
+  public long possibleLoops() {
+    int loops = 0;
+
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        if (map[i][j] == '.' && isLoopWithBlockAt(new Pos(i, j))) {
+          loops++;
+        }
+      }
+    }
+
+    return loops;
+  }
+
+  private boolean isLoopWithBlockAt(Pos blockAt) {
+    Walker slow = new Walker(start, Direction.UP, blockAt);
+    Walker fast = new Walker(start, Direction.UP, blockAt);
+
+    while (fast.isInLab()) {
+      fast.move();
+      if (fast.equals(slow)) return true;
+      fast.move();
+      slow.move();
+    }
+
+    return false;
   }
 
   private boolean free(Pos pos) {
@@ -64,96 +92,8 @@ public record Laboratory(int rows, int cols, char[][] map, Pos start) {
     return 0 <= i && i < rows && 0 <= j && j < cols;
   }
 
-  private Integer fieldNumber(Pos pos) {
-    return fieldNumber(pos.i(), pos.j());
-  }
-
-  private Integer fieldNumber(int i, int j) {
-    return i * cols + j;
-  }
-
-  public long possibleLoops() {
-    int loops = 0;
-
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        if (map[i][j] == '.' && isLoopWithBlockAt3(new Pos(i, j))) {
-          loops++;
-        }
-      }
-    }
-
-    return loops;
-  }
-
-  private boolean isLoopWithBlockAt(Pos blockAt) {
-    var pos = start;
-    var dir = Direction.UP;
-    int dups = 0;
-
-    int all = rows * cols;
-
-    Set<Integer> visitedFields = new HashSet<>();
-    Pos next = pos.move(dir);
-
-    while (validPos(next)) {
-      if (!visitedFields.add(fieldNumber(pos))) {
-        dups++;
-      }
-      if (free(next) && !next.equals(blockAt)) {
-        pos = next;
-      } else {
-        dir = dir.turnRight();
-      }
-
-      next = pos.move(dir);
-
-      if (dups > all || visitedFields.size() >= all) return true;
-    }
-
-    return false;
-  }
-
-  private boolean isLoopWithBlockAt3(Pos blockAt) {
-    int dups = 0;
-    int all = rows * cols;
-
-    Set<Integer> visitedFields = new HashSet<>();
-    Walker walker = new Walker(start, Direction.UP, blockAt);
-
-    while (walker.isInLab()) {
-      if (!visitedFields.add(fieldNumber(walker.pos))) {
-        dups++;
-      }
-      walker.move();
-
-      if (dups > all || visitedFields.size() >= all) return true;
-    }
-
-    return false;
-  }
-
-  private boolean isLoopWithBlockAt2(Pos blockAt) {
-    Walker walker = new Walker(start, Direction.UP, blockAt);
-
-    int all = rows * cols;
-    int dups = 0;
-
-    Set<Integer> visitedFields = new HashSet<>();
-
-    while (walker.isInLab()) {
-      if (!visitedFields.add(fieldNumber(walker.pos))) {
-        dups++;
-      }
-      walker.move();
-
-      if (dups >= all || visitedFields.size() >= all) return true;
-    }
-
-    return false;
-  }
-
   @AllArgsConstructor
+  @EqualsAndHashCode
   private class Walker {
 
     private Pos pos;
@@ -163,11 +103,6 @@ public record Laboratory(int rows, int cols, char[][] map, Pos start) {
 
     public boolean isInLab() {
       return validPos(pos);
-    }
-
-    public boolean nextIsInLab() {
-      var next = pos.move(dir);
-      return validPos(next);
     }
 
     public void move() {
