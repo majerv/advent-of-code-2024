@@ -44,9 +44,11 @@ public class Equation {
 
       results.forEach(
           r -> {
-            newResults.add(r + op);
-            newResults.add(r * op);
-            if (withConcatenation) newResults.add(concat(r, op));
+            if (r <= result) {
+              newResults.add(r + op);
+              newResults.add(r * op);
+              if (withConcatenation) newResults.add(concat(r, op));
+            }
           });
 
       results.clear();
