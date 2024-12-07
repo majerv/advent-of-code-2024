@@ -69,8 +69,8 @@ public class DailyExercisesTest {
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
-  //  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
-  @MethodSource
+  @MethodSource({"com.vimacodes.aoc.DailyExercisesTest#currentDay"})
+  //  @MethodSource
   void testInputs(
       final String inputName, final Function<String, Long> solver, final long expectedResult) {
     long result = solver.apply(Inputs.resourceToString(inputName));
