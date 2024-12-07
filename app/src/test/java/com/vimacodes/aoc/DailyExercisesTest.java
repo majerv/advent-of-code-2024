@@ -6,6 +6,7 @@ import com.vimacodes.aoc.day3.Day3Exercises;
 import com.vimacodes.aoc.day4.Day4Exercises;
 import com.vimacodes.aoc.day5.Day5Exercises;
 import com.vimacodes.aoc.day6.Day6Exercises;
+import com.vimacodes.aoc.day7.Day7Exercises;
 import com.vimacodes.aoc.utils.Inputs;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -51,15 +52,20 @@ public class DailyExercisesTest {
         Arguments.of("day6_sample", solve(Day6Exercises::firstStar), 41),
         Arguments.of("day6_inputs", solve(Day6Exercises::firstStar), 4515),
         Arguments.of("day6_sample", solve(Day6Exercises::secondStar), 6),
-        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 1309));
+        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 1309),
+        // day7
+        Arguments.of("day7_sample", solve(Day7Exercises::firstStar), 3749),
+        Arguments.of("day7_inputs", solve(Day7Exercises::firstStar), 1289579105366L),
+        Arguments.of("day7_sample", solve(Day7Exercises::secondStar), 11387),
+        Arguments.of("day7_inputs", solve(Day7Exercises::secondStar), 92148721834692L));
   }
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day6_sample", solve(Day6Exercises::firstStar), 41),
-        Arguments.of("day6_inputs", solve(Day6Exercises::firstStar), 4515),
-        Arguments.of("day6_sample", solve(Day6Exercises::secondStar), 6),
-        Arguments.of("day6_inputs", solve(Day6Exercises::secondStar), 1309));
+        Arguments.of("day7_sample", solve(Day7Exercises::firstStar), 3749),
+        Arguments.of("day7_inputs", solve(Day7Exercises::firstStar), 1289579105366L),
+        Arguments.of("day7_sample", solve(Day7Exercises::secondStar), 11387),
+        Arguments.of("day7_inputs", solve(Day7Exercises::secondStar), 92148721834692L));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
