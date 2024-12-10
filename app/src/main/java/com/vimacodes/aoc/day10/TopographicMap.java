@@ -16,12 +16,12 @@ public record TopographicMap(Matrix matrix) {
     return matrix.collectAllEqualTo(0).stream();
   }
 
-  public TrailStats stats(Pos start) {
+  public TrailStats stats(Pos head) {
     int allNines = 0;
     var allNinesPos = new HashSet<Pos>();
 
     var queue = new LinkedList<Pos>();
-    queue.add(start);
+    queue.add(head);
 
     while (!queue.isEmpty()) {
       Pos pos = queue.poll();
@@ -40,6 +40,6 @@ public record TopographicMap(Matrix matrix) {
       }
     }
 
-    return new TrailStats(start, allNinesPos.size(), allNines);
+    return new TrailStats(head, allNinesPos.size(), allNines);
   }
 }
