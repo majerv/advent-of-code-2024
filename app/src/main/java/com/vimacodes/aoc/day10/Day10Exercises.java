@@ -1,5 +1,7 @@
 package com.vimacodes.aoc.day10;
 
+import com.vimacodes.aoc.day10.TopographicMap.TrailStats;
+
 public class Day10Exercises {
   public static long firstStar(final String text) {
     TopographicMap map = TopographicMap.parse(text);

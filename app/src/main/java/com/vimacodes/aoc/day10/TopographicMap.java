@@ -45,4 +45,6 @@ public record TopographicMap(Matrix matrix) {
 
     return new TrailStats(head, allNinesPos.size(), allNines);
   }
+
+  public record TrailStats(Pos head, int score, int rank) {}
 }
