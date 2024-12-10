@@ -2,27 +2,18 @@ package com.vimacodes.aoc.day10;
 
 import com.vimacodes.aoc.day6.Pos;
 import com.vimacodes.aoc.utils.Matrix;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.stream.Stream;
 
-public record TopographicMap(Matrix matrix, List<Pos> trailHeads) {
+public record TopographicMap(Matrix matrix) {
 
   public static TopographicMap parse(String text) {
-    Matrix matrix = Matrix.parse(text);
-    List<Pos> trailHeads = new ArrayList<>();
+    return new TopographicMap(Matrix.parse(text));
+  }
 
-    for (int i = 0; i < matrix.rows(); i++) {
-      for (int j = 0; j < matrix.cols(); j++) {
-        int num = matrix.getNum(i, j);
-        if (num == 0) {
-          trailHeads.add(new Pos(i, j));
-        }
-      }
-    }
-
-    return new TopographicMap(matrix, trailHeads);
+  public Stream<Pos> trailHeads() {
+    return matrix.collectAllEqualTo(0).stream();
   }
 
   public TrailStats stats(Pos start) {

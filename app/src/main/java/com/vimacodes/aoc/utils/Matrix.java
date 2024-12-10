@@ -1,6 +1,7 @@
 package com.vimacodes.aoc.utils;
 
 import com.vimacodes.aoc.day6.Pos;
+import java.util.ArrayList;
 import java.util.List;
 
 public record Matrix(int rows, int cols, char[][] map) {
@@ -42,5 +43,19 @@ public record Matrix(int rows, int cols, char[][] map) {
 
   public boolean validPos(int i, int j) {
     return 0 <= i && i < rows && 0 <= j && j < cols;
+  }
+
+  public List<Pos> collectAllEqualTo(int num) {
+    List<Pos> all = new ArrayList<>();
+
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        if (getNum(i, j) == num) {
+          all.add(new Pos(i, j));
+        }
+      }
+    }
+
+    return all;
   }
 }
