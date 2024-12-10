@@ -1,6 +1,7 @@
 package com.vimacodes.aoc;
 
 import com.vimacodes.aoc.day1.Day1Exercises;
+import com.vimacodes.aoc.day10.Day10Exercises;
 import com.vimacodes.aoc.day2.Day2Exercises;
 import com.vimacodes.aoc.day3.Day3Exercises;
 import com.vimacodes.aoc.day4.Day4Exercises;
@@ -64,15 +65,25 @@ public class DailyExercisesTest {
         Arguments.of("day8_sample", solve(Day8Exercises::firstStar), 14),
         Arguments.of("day8_inputs", solve(Day8Exercises::firstStar), 357),
         Arguments.of("day8_sample", solve(Day8Exercises::secondStar), 34),
-        Arguments.of("day8_inputs", solve(Day8Exercises::secondStar), 1266));
+        Arguments.of("day8_inputs", solve(Day8Exercises::secondStar), 1266),
+        // day9
+        Arguments.of("day9_sample", solve(Day9Exercises::firstStar), 1928),
+        Arguments.of("day9_inputs", solve(Day9Exercises::firstStar), 6398252054886L),
+        Arguments.of("day9_sample", solve(Day9Exercises::secondStar), 2858),
+        Arguments.of("day9_inputs", solve(Day9Exercises::secondStar), 6415666220005L),
+        // day10
+        Arguments.of("day10_sample", solve(Day10Exercises::firstStar), 36),
+        Arguments.of("day10_inputs", solve(Day10Exercises::firstStar), 430),
+        Arguments.of("day10_sample", solve(Day10Exercises::secondStar), 81),
+        Arguments.of("day10_inputs", solve(Day10Exercises::secondStar), 928));
   }
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day9_sample", solve(Day9Exercises::firstStar), 1928),
-        Arguments.of("day9_inputs", solve(Day9Exercises::firstStar), 6398252054886L),
-        Arguments.of("day9_sample", solve(Day9Exercises::secondStar), 2858),
-        Arguments.of("day9_inputs", solve(Day9Exercises::secondStar), 6415666220005L));
+        Arguments.of("day10_sample", solve(Day10Exercises::firstStar), 36),
+        Arguments.of("day10_inputs", solve(Day10Exercises::firstStar), 430),
+        Arguments.of("day10_sample", solve(Day10Exercises::secondStar), 81),
+        Arguments.of("day10_inputs", solve(Day10Exercises::secondStar), 928));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
