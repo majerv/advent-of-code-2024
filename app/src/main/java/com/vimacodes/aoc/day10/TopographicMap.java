@@ -8,12 +8,15 @@ import java.util.stream.Stream;
 
 public record TopographicMap(Matrix matrix) {
 
+  private static final int TRAIL_HEAD_VALUE = 0;
+  private static final int TRAIL_END_VALUE = 9;
+
   public static TopographicMap parse(String text) {
     return new TopographicMap(Matrix.parse(text));
   }
 
   public Stream<Pos> trailHeads() {
-    return matrix.collectAllEqualTo(0).stream();
+    return matrix.collectAllEqualTo(TRAIL_HEAD_VALUE).stream();
   }
 
   public TrailStats stats(Pos head) {
@@ -29,7 +32,7 @@ public record TopographicMap(Matrix matrix) {
       int num = matrix.getNum(pos);
       int next = num + 1;
 
-      if (num == 9) {
+      if (num == TRAIL_END_VALUE) {
         allNines++;
         allNinesPos.add(pos);
       } else {
