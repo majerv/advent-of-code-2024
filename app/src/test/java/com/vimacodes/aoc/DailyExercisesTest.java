@@ -83,8 +83,8 @@ public class DailyExercisesTest {
     return Stream.of(
         Arguments.of("day11_sample", solve(Day11Exercises::firstStar), 55312),
         Arguments.of("day11_inputs", solve(Day11Exercises::firstStar), 198075),
-        Arguments.of("day11_sample", solve(Day11Exercises::secondStar), 0),
-        Arguments.of("day11_inputs", solve(Day11Exercises::secondStar), 0));
+        Arguments.of("day11_sample", solve(Day11Exercises::secondStar), 65601038650482L),
+        Arguments.of("day11_inputs", solve(Day11Exercises::secondStar), 235571309320764L));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")

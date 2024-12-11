@@ -6,6 +6,6 @@ public class Day11Exercises {
   }
 
   public static long secondStar(final String text) {
-    return Stones.parse(text).blink(75).num();
+    return Stones.parse(text).blinkRec(75);
   }
 }

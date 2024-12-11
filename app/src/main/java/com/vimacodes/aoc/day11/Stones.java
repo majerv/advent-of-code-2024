@@ -2,7 +2,10 @@ package com.vimacodes.aoc.day11;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.javatuples.Pair;
 
 public class Stones {
 
@@ -40,14 +43,46 @@ public class Stones {
   }
 
   public Stones blink(int times) {
-    //    System.out.println(stones);
-
     for (int i = 0; i < times; i++) {
       this.stones = blinkAt(stones);
-      System.out.printf("blink %s: %s\n", i, stones.size());
     }
 
     return this;
+  }
+
+  public long blinkRec(int times) {
+    var cache = new HashMap<Pair<Long, Integer>, Long>();
+    long count = 0;
+
+    for (Long stone : stones) {
+      count += blink(stone, times, cache);
+    }
+
+    return count;
+  }
+
+  private long blink(long stone, int times, Map<Pair<Long, Integer>, Long> cache) {
+    if (times == 0) return 1;
+
+    var key = new Pair<>(stone, times);
+    if (cache.containsKey(key)) return cache.get(key);
+
+    long result;
+    String numStr = String.valueOf(stone);
+
+    if (stone == 0) {
+      result = blink(1, times - 1, cache);
+    } else if (numStr.length() % 2 == 0) {
+      int half = numStr.length() / 2;
+      result =
+          blink(Long.parseLong(numStr.substring(0, half)), times - 1, cache)
+              + blink(Long.parseLong(numStr.substring(half)), times - 1, cache);
+    } else {
+      result = blink(stone * 2024, times - 1, cache);
+    }
+
+    cache.put(key, result);
+    return result;
   }
 
   public long num() {
