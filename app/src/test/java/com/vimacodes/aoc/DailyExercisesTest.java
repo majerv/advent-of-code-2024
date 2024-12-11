@@ -2,6 +2,7 @@ package com.vimacodes.aoc;
 
 import com.vimacodes.aoc.day1.Day1Exercises;
 import com.vimacodes.aoc.day10.Day10Exercises;
+import com.vimacodes.aoc.day11.Day11Exercises;
 import com.vimacodes.aoc.day2.Day2Exercises;
 import com.vimacodes.aoc.day3.Day3Exercises;
 import com.vimacodes.aoc.day4.Day4Exercises;
@@ -80,10 +81,10 @@ public class DailyExercisesTest {
 
   private static Stream<Arguments> currentDay() {
     return Stream.of(
-        Arguments.of("day10_sample", solve(Day10Exercises::firstStar), 36),
-        Arguments.of("day10_inputs", solve(Day10Exercises::firstStar), 430),
-        Arguments.of("day10_sample", solve(Day10Exercises::secondStar), 81),
-        Arguments.of("day10_inputs", solve(Day10Exercises::secondStar), 928));
+        Arguments.of("day11_sample", solve(Day11Exercises::firstStar), 55312),
+        Arguments.of("day11_inputs", solve(Day11Exercises::firstStar), 198075),
+        Arguments.of("day11_sample", solve(Day11Exercises::secondStar), 0),
+        Arguments.of("day11_inputs", solve(Day11Exercises::secondStar), 0));
   }
 
   @ParameterizedTest(name = "[{index}] {0} {2}")
