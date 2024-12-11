@@ -76,7 +76,12 @@ public class DailyExercisesTest {
         Arguments.of("day10_sample", solve(Day10Exercises::firstStar), 36),
         Arguments.of("day10_inputs", solve(Day10Exercises::firstStar), 430),
         Arguments.of("day10_sample", solve(Day10Exercises::secondStar), 81),
-        Arguments.of("day10_inputs", solve(Day10Exercises::secondStar), 928));
+        Arguments.of("day10_inputs", solve(Day10Exercises::secondStar), 928),
+        // day11
+        Arguments.of("day11_sample", solve(Day11Exercises::firstStar), 55312),
+        Arguments.of("day11_inputs", solve(Day11Exercises::firstStar), 198075),
+        Arguments.of("day11_sample", solve(Day11Exercises::secondStar), 65601038650482L),
+        Arguments.of("day11_inputs", solve(Day11Exercises::secondStar), 235571309320764L));
   }
 
   private static Stream<Arguments> currentDay() {
